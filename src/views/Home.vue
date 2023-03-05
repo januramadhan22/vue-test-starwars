@@ -40,7 +40,7 @@
         <th>Skin Color</th>
         <th>Eye Color</th>
       </thead>
-      <tbody v-for="character of characters" key="index">
+      <tbody v-for="character in allCharacters" key="index">
         <td>{{ character.name }}</td>
         <td>{{ character.gender }}</td>
         <td>{{ character.height }}cm</td>
@@ -51,26 +51,47 @@
         <td>{{ character.eye_color }}</td>
       </tbody>
     </table>
+
+    <div class="paginate-btn">
+      <button @click="prevPage" id="prev-btn">Previous</button>
+      <button @click="nextPage" id="next-btn" type="submit">Next</button>
+    </div>
   </section>
 </template>
 
 <script setup>
-import { onMounted, ref, computed, onBeforeMount } from "vue";
+import { onMounted, ref } from "vue";
+import axiosSetup from "../axiosSetup";
 import Navbar from "../components/Navbar.vue";
-import store from "../store";
 
 const keyword = ref("");
+let currentPage = 1;
+const allCharacters = ref([]);
+const datas = ref({});
 
-const characters = computed(() =>
-  keyword != "" ? store.state.searchedCharacters : store.state.getCharacters
-);
+onMounted(async () => {
+  fecthAllCharacters(currentPage);
+});
 
-const getCharacters = () => {
-  store.dispatch("getCharacters");
+const fecthAllCharacters = (page) => {
+  axiosSetup.get(`people/?page=${page}`).then(({ data }) => {
+    (allCharacters.value = data.results), (datas.value = data);
+  });
 };
 
-const searchCharacter = () => {
-  store.dispatch("searchCharacters", keyword.value);
+const nextPage = () => {
+  if (currentPage < 9) {
+    fecthAllCharacters((currentPage += 1));
+  } else {
+    fecthAllCharacters(currentPage);
+  }
+};
+const prevPage = () => {
+  if (currentPage > 1) {
+    fecthAllCharacters((currentPage -= 1));
+  } else {
+    fecthAllCharacters(currentPage);
+  }
 };
 </script>
 
@@ -126,6 +147,9 @@ header {
 .character-list {
   padding: 0 80px;
   margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 
   .character-table {
     width: 100%;
@@ -147,12 +171,39 @@ header {
     th,
     td {
       padding: 10px 18px;
-      border: 1px solid white;
+      border: 4px solid white;
       border-radius: 8px;
     }
 
     tbody:nth-child(odd) {
       background: whitesmoke;
+    }
+  }
+
+  .paginate-btn {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 40px;
+
+    #prev-btn,
+    #next-btn {
+      width: 120px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid rgb(96, 201, 96);
+      cursor: pointer;
+      background-color: rgb(96, 201, 96);
+      font-weight: 500;
+      color: white;
+      transition: all ease-in 150ms;
+    }
+
+    #prev-btn:hover,
+    #next-btn:hover {
+      background-color: white;
+      color: rgb(96, 201, 96);
     }
   }
 }

@@ -7,9 +7,8 @@ export function searchCharacters({ commit }, keyword) {
     });
   }
 }
-
-export function getCharacters({ commit }) {
-  axiosSetup.get(`people`).then(({ data }) => {
-    commit("setGetCharacters", data.results);
+export function getAllCharacters({ commit }, page) {
+  axiosSetup.get(`people/?page=${page}`).then(({ data }) => {
+    commit("setGetAllCharacters", data.results);
   });
 }
