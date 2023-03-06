@@ -84,6 +84,7 @@ const nextPage = () => {
     fecthAllCharacters((currentPage += 1));
   } else {
     fecthAllCharacters(currentPage);
+    alert("You already at the last page");
   }
 };
 const prevPage = () => {
@@ -91,6 +92,7 @@ const prevPage = () => {
     fecthAllCharacters((currentPage -= 1));
   } else {
     fecthAllCharacters(currentPage);
+    alert("You already at the first page");
   }
 };
 </script>
