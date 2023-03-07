@@ -58,47 +58,6 @@ header {
 }
 
 .film-list {
-  padding: 0 80px;
-  margin-bottom: 40px;
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-
-  .film-table {
-    width: 100%;
-    text-align: left;
-    border-collapse: collapse;
-    overflow-x: scroll;
-
-    thead {
-      text-transform: uppercase;
-      background-color: rgb(214, 253, 214);
-      color: gray;
-    }
-
-    tbody {
-      text-transform: capitalize;
-      font-size: 14px;
-    }
-
-    th,
-    td {
-      padding: 10px 18px;
-      border: 4px solid white;
-      border-radius: 8px;
-    }
-
-    tbody:nth-child(odd) {
-      background: whitesmoke;
-    }
-
-    .small-tab {
-      width: 15%;
-    }
-
-    .film-title {
-      font-weight: 500;
-    }
-  }
 }
 </style>
