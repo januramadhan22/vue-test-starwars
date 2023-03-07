@@ -101,6 +101,12 @@ header {
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 6px whitesmoke;
+    cursor: pointer;
+    transition: all ease-in 150ms;
+
+    &:hover {
+      transform: scale(105%);
+    }
 
     .card-image {
       width: 100%;

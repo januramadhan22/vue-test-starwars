@@ -4,37 +4,27 @@
     <h1>Planets List</h1>
   </header>
 
-  <section class="film-list">
-    <table class="film-table">
-      <thead>
-        <th>Name</th>
-        <th>Rotation Period</th>
-        <th>Orbital Period</th>
-        <th>Diameter</th>
-        <th>Climate</th>
-        <th>Gravity</th>
-        <th>Terrain</th>
-        <th>Surface Water</th>
-        <th>Populations</th>
-      </thead>
-      <tbody v-for="planet in allPlanets" key="index">
-        <td class="planet-title">{{ planet.name }}</td>
-        <td>{{ planet.rotation_period }}</td>
-        <td>{{ planet.orbital_period }}</td>
-        <td>{{ planet.diameter }}</td>
-        <td>{{ planet.climate }}</td>
-        <td>{{ planet.gravity }}</td>
-        <td>{{ planet.terrain }}</td>
-        <td>{{ planet.surface_water }}</td>
-        <td>{{ planet.population }}</td>
-      </tbody>
-    </table>
-
-    <div class="paginate-btn">
-      <button @click="prevPage" id="prev-btn">Previous</button>
-      <button @click="nextPage" id="next-btn" type="submit">Next</button>
+  <section class="planet-list">
+    <div class="card-planet" v-for="planet in allPlanets" key="index">
+      <img
+        class="card-image"
+        src="https://vignette2.wikia.nocookie.net/starwars/images/1/18/Ord_Mantell_TOR_new.png/revision/latest?cb=20121011040100"
+        alt=""
+      />
+      <div class="planet-desc">
+        <h3 class="planet-name">{{ planet.name }}</h3>
+        <div>
+          <p><strong>Diameter:</strong> {{ planet.diameter }}</p>
+          <p><strong>Population:</strong> {{ planet.population }}</p>
+        </div>
+      </div>
     </div>
   </section>
+
+  <div class="paginate-btn">
+    <button @click="prevPage" id="prev-btn">Previous</button>
+    <button @click="nextPage" id="next-btn" type="submit">Next</button>
+  </div>
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
@@ -87,70 +77,61 @@ header {
   gap: 24px;
 }
 
-.film-list {
+.planet-list {
   padding: 0 80px;
   margin-bottom: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
 
-  .film-table {
-    width: 100%;
-    text-align: left;
-    border-collapse: collapse;
-    overflow-x: scroll;
+  .card-planet {
+    width: 180px;
+    border: 2px solid gold;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 6px whitesmoke;
+    cursor: pointer;
+    transition: all ease-in 150ms;
 
-    thead {
-      text-transform: uppercase;
-      background-color: rgb(214, 253, 214);
-      color: gray;
+    &:hover {
+      transform: scale(105%);
     }
 
-    tbody {
-      text-transform: capitalize;
-      font-size: 14px;
+    .card-image {
+      width: 100%;
+      border-radius: 12px;
+      background-color: transparent;
+      margin-bottom: 10px;
     }
 
-    th,
-    td {
-      padding: 10px 18px;
-      border: 4px solid white;
-      border-radius: 8px;
-    }
-
-    tbody:nth-child(odd) {
-      background: whitesmoke;
-    }
-
-    .planet-title {
-      font-weight: 500;
-    }
-  }
-
-  .paginate-btn {
-    width: 100%;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    gap: 40px;
-
-    #prev-btn,
-    #next-btn {
-      width: 120px;
-      height: 32px;
-      border-radius: 8px;
-      border: 1px solid rgb(96, 201, 96);
-      cursor: pointer;
-      background-color: rgb(96, 201, 96);
-      font-weight: 500;
+    .planet-desc {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
       color: white;
-      transition: all ease-in 150ms;
-    }
+      background-color: transparent;
 
-    #prev-btn:hover,
-    #next-btn:hover {
-      background-color: white;
-      color: rgb(96, 201, 96);
+      h3 {
+        background-color: transparent;
+      }
+
+      div {
+        display: flex;
+        gap: 20px;
+        font-size: 14px;
+        background-color: transparent;
+
+        strong,
+        p {
+          text-align: center;
+          background-color: transparent;
+        }
+      }
     }
   }
 }

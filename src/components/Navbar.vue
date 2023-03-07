@@ -23,6 +23,7 @@
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 0 12px rgb(196, 194, 194);
+  z-index: 9999999;
 
   #appName {
     background-color: transparent;
