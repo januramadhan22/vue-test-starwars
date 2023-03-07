@@ -168,4 +168,19 @@ header {
     color: gold;
   }
 }
+
+@media only screen and (max-width: 1024px) {
+  .character-list {
+    grid-template-columns: auto auto auto;
+  }
+
+  .paginate-btn {
+    justify-content: center;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .character-list {
+    grid-template-columns: auto auto;
+  }
+}
 </style>

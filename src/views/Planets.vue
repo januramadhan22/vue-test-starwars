@@ -135,4 +135,18 @@ header {
     }
   }
 }
+
+@media only screen and (max-width: 1024px) {
+  .planet-list {
+    grid-template-columns: auto auto auto;
+  }
+  .paginate-btn {
+    justify-content: center;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .planet-list {
+    grid-template-columns: auto auto;
+  }
+}
 </style>

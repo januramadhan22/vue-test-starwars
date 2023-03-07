@@ -102,4 +102,10 @@ header {
     }
   }
 }
+
+@media only screen and (max-width: 1024px) {
+  .film-list {
+    grid-template-columns: auto auto;
+  }
+}
 </style>

@@ -53,6 +53,7 @@
     gap: 40px;
     cursor: pointer;
     background-color: transparent;
+    visibility: visible;
 
     .menu-btn {
       font-size: 18px;
@@ -61,6 +62,8 @@
       opacity: 0.6;
       transition: all ease-in 150ms;
       background-color: transparent;
+      visibility: visible;
+      display: block;
 
       &:hover {
         opacity: 1;
