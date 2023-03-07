@@ -4,24 +4,12 @@
     <h1>Films List</h1>
   </header>
 
-  <section class="film-list">
-    <table class="film-table">
-      <thead>
-        <th class="small-tab">Title</th>
-        <th class="small-tab">Director</th>
-        <th class="small-tab">Producers</th>
-        <th class="small-tab">Release Date</th>
-        <th class="large-tab">opening_crawl</th>
-      </thead>
-      <tbody v-for="film in allFilms" key="index">
-        <td class="small-tab film-title">{{ film.title }}</td>
-        <td class="small-tab">{{ film.director }}</td>
-        <td class="small-tab">{{ film.producer }}</td>
-        <td class="small-tab">{{ film.release_date }}</td>
-        <td class="large-tab">{{ film.opening_crawl }}</td>
-      </tbody>
-    </table>
-  </section>
+  <div class="film-list">
+    <div class="card-film" v-for="film in allFilms" key="index">
+      <img src="" alt="" />
+      {{ film.title }}
+    </div>
+  </div>
 </template>
 <script setup>
 import { onMounted, ref } from "vue";
@@ -58,6 +46,12 @@ header {
 }
 
 .film-list {
-  display: flex;
+  padding: 0 80px;
+  margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
 }
 </style>

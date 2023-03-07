@@ -40,7 +40,8 @@
     text-decoration: none;
 
     &:hover {
-      opacity: 0.7;
+      opacity: 1;
+      color: gold;
     }
   }
 
@@ -50,6 +51,7 @@
     align-items: center;
     gap: 40px;
     cursor: pointer;
+    background-color: transparent;
 
     .menu-btn {
       font-size: 18px;
@@ -57,9 +59,11 @@
       color: black;
       opacity: 0.6;
       transition: all ease-in 150ms;
+      background-color: transparent;
 
       &:hover {
         opacity: 1;
+        color: gold;
       }
     }
   }

@@ -2,61 +2,29 @@
   <Navbar />
   <header>
     <h1>Characters List</h1>
-
-    <form @submit.prevent="searchCharacter">
-      <input
-        id="search-field"
-        type="text"
-        placeholder="Search Character . . ."
-        @change="searchCharacter"
-        v-model="keyword"
-      />
-      <button id="search-btn" type="submit">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-          />
-        </svg>
-      </button>
-    </form>
   </header>
 
   <section class="character-list">
-    <table class="character-table">
-      <thead>
-        <th>Name</th>
-        <th>Gender</th>
-        <th>Height</th>
-        <th>Weight</th>
-        <th>Birthday</th>
-        <th>Hair Color</th>
-        <th>Skin Color</th>
-        <th>Eye Color</th>
-      </thead>
-      <tbody v-for="character in allCharacters" key="index">
-        <td>{{ character.name }}</td>
-        <td>{{ character.gender }}</td>
-        <td>{{ character.height }}cm</td>
-        <td>{{ character.mass }}kg</td>
-        <td>{{ character.birth_year }}</td>
-        <td>{{ character.hair_color }}</td>
-        <td>{{ character.skin_color }}</td>
-        <td>{{ character.eye_color }}</td>
-      </tbody>
-    </table>
-
-    <div class="paginate-btn">
-      <button @click="prevPage" id="prev-btn">Previous</button>
-      <button @click="nextPage" id="next-btn" type="submit">Next</button>
+    <div class="card-character" v-for="character in allCharacters" key="index">
+      <img
+        class="card-image"
+        src="https://cdn3.iconfinder.com/data/icons/halloween-avatar-01/348/halloween_avatar-20-512.png"
+        alt=""
+      />
+      <div class="character-desc">
+        <h3 class="character-name">{{ character.name }}</h3>
+        <div>
+          <p><strong>Heigth:</strong> {{ character.height }}cm</p>
+          <p><strong>Weigth:</strong> {{ character.mass }}kg</p>
+        </div>
+      </div>
     </div>
   </section>
+
+  <div class="paginate-btn">
+    <button @click="prevPage" id="prev-btn">Previous</button>
+    <button @click="nextPage" id="next-btn" type="submit">Next</button>
+  </div>
 </template>
 
 <script setup>
@@ -102,6 +70,7 @@ const prevPage = () => {
   margin: 0;
   padding: 0;
   font-family: "proxima nova";
+  background-color: rgb(10, 10, 27);
 }
 
 header {
@@ -111,102 +80,86 @@ header {
   align-items: center;
   gap: 24px;
 
-  form {
-    width: 320px;
-    padding: 8px 12px;
-    border: 1px solid rgb(207, 207, 207);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-
-    #search-field {
-      width: 100%;
-      border: none;
-      padding: 3px 2px;
-    }
-    :focus,
-    :active {
-      outline: none;
-      background-color: transparent;
-    }
-
-    #search-btn {
-      cursor: pointer;
-      width: 24px;
-      height: 24px;
-      padding: 0;
-      border: none;
-      background-color: transparent;
-      color: gray;
-    }
-    :hover {
-      color: black;
-    }
+  h1 {
+    color: white;
   }
 }
 
 .character-list {
   padding: 0 80px;
   margin-bottom: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
 
-  .character-table {
-    width: 100%;
-    text-align: left;
-    border-collapse: collapse;
-    overflow-x: scroll;
+  .card-character {
+    width: 180px;
+    border: 2px solid gold;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 6px whitesmoke;
 
-    thead {
-      text-transform: uppercase;
-      background-color: rgb(214, 253, 214);
-      color: gray;
+    .card-image {
+      width: 100%;
+      border-radius: 12px;
+      background-color: transparent;
     }
 
-    tbody {
-      text-transform: capitalize;
-      font-size: 14px;
-    }
+    .character-desc {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      color: white;
+      background-color: transparent;
 
-    th,
-    td {
-      padding: 10px 18px;
-      border: 4px solid white;
-      border-radius: 8px;
-    }
+      h3 {
+        background-color: transparent;
+      }
 
-    tbody:nth-child(odd) {
-      background: whitesmoke;
+      div {
+        display: flex;
+        gap: 20px;
+        font-size: 14px;
+        background-color: transparent;
+
+        strong,
+        p {
+          text-align: center;
+          background-color: transparent;
+        }
+      }
     }
   }
+}
+.paginate-btn {
+  padding: 0 40px 40px 40px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 40px;
 
-  .paginate-btn {
-    width: 100%;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    gap: 40px;
+  #prev-btn,
+  #next-btn {
+    width: 120px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid gold;
+    cursor: pointer;
+    background-color: transparent;
+    font-weight: 500;
+    color: white;
+    transition: all ease-in 150ms;
+  }
 
-    #prev-btn,
-    #next-btn {
-      width: 120px;
-      height: 32px;
-      border-radius: 8px;
-      border: 1px solid rgb(96, 201, 96);
-      cursor: pointer;
-      background-color: rgb(96, 201, 96);
-      font-weight: 500;
-      color: white;
-      transition: all ease-in 150ms;
-    }
-
-    #prev-btn:hover,
-    #next-btn:hover {
-      background-color: white;
-      color: rgb(96, 201, 96);
-    }
+  #prev-btn:hover,
+  #next-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: gold;
   }
 }
 </style>
